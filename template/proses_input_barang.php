@@ -3,14 +3,12 @@ include("koneksi.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_brg = mysqli_real_escape_string($koneksi, $_POST['nama_brg']);
-	$merek = mysqli_real_escape_string($koneksi, $_POST['merek']);
+    $merek = mysqli_real_escape_string($koneksi, $_POST['merek']);
     $harga = intval($_POST['harga']);
     $tgl_pembelian = $_POST['tgl_pembelian'];
     $serial_key = mysqli_real_escape_string($koneksi, $_POST['serial_key']);
-	$kode_brg = mysqli_real_escape_string($koneksi, $_POST['kode_brg']);
-	$qr = $nama_brg . ' ' . $harga . ' ' . $serial_key . ' ' . $merek . ' ' . $kode_brg . ' ' . $tgl_pembelian;
-
-	
+    $kode_brg = mysqli_real_escape_string($koneksi, $_POST['kode_brg']);
+    $qr = $nama_brg . ' ' . $harga . ' ' . $serial_key . ' ' . $merek . ' ' . $kode_brg . ' ' . $tgl_pembelian;
 
     // File upload handling
     $targetDirectory = "assets/images/barang/";
@@ -50,6 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       VALUES ('$nama_brg','$merek','$kode_brg', $harga, '$tgl_pembelian', '$serial_key', '$targetFile', '$qr')";
 
             if (mysqli_query($koneksi, $query)) {
+                // Get the last inserted ID
+                $last_inserted_id = mysqli_insert_id($koneksi);
+
+                // Generate QR link
+                $qr_link = "http://192.168.40.105/admin/template/detail-barang.php?id_brg=" . $last_inserted_id;
+
+                // Update the qr_link for the last inserted row
+                $update_qr_link_query = "UPDATE barang SET qr_link = '$qr_link' WHERE id_brg = $last_inserted_id";
+                mysqli_query($koneksi, $update_qr_link_query);
+
                 header("Location: dashboard-barang.php");
                 exit;
             } else {

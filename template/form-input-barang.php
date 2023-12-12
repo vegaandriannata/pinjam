@@ -304,9 +304,6 @@ session_start();
                                                                     
 																	
                                                                     <div class="divider gap-bottom-25"></div>
-                                                                   
-                                                                    
-                                                                 
                                                                     <div class="j-row">
                                                                         
                                                                         <div class="page-body">
@@ -370,9 +367,7 @@ session_start();
                                 </div>
                             </div>
                          
-                            <div id="styleSelector">
-
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

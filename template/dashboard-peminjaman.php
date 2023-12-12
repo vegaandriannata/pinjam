@@ -316,8 +316,6 @@ function toggleFilterForm() {
                                     </li>
                                 </ul>
                             </li>
-                            
-                        
                     </div>
                 </nav>
                 <div class="pcoded-content">
@@ -359,25 +357,25 @@ function toggleFilterForm() {
 											</button>
 											<button class="btn btn-default-green btn-round" onclick="toggleFilterForm()">Filter</button>
 										<div class="j-unit">
-    <div class="j-input">
-        <form id="filterForm" class="date-filter" method="get" action="" style="display: none;">
-            <div class="form-group">
-                <span for="start_date">Tanggal Awal:</span>
-                <input type="date" name="start_date" id="start_date" class="form-control">
-            </div>
+										<div class="j-input">
+											<form id="filterForm" class="date-filter" method="get" action="" style="display: none;">
+												<div class="form-group">
+													<span for="start_date">Tanggal Awal:</span>
+													<input type="date" name="start_date" id="start_date" class="form-control">
+												</div>
 
-            <div class="form-group">
-                <span for="end_date">Tanggal Akhir:</span>
-                <input type="date" name="end_date" id="end_date" class="form-control">
-            </div>
+												<div class="form-group">
+													<span for="end_date">Tanggal Akhir:</span>
+													<input type="date" name="end_date" id="end_date" class="form-control">
+												</div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-round">Filter</button>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
+												<div class="form-group">
+													<button type="submit" class="btn btn-primary btn-round">Filter</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									</div>
 											<div>
 											<script>
 												function redirectToForm() {
@@ -468,9 +466,7 @@ function toggleFilterForm() {
                         </div>
                         <!-- Warning Section Starts -->
 
-                        <div id="styleSelector">
-
-                        </div>
+                       
                     </div>
                 </div>
             </div>

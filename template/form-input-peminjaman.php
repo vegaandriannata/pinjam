@@ -325,15 +325,14 @@ session_start();
                                 </div>
                             </div>
                          
-                            <div id="styleSelector">
-
-                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+	
 
 <script type="text/javascript" src="../bower_components/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="../bower_components/jquery-ui/js/jquery-ui.min.js"></script>

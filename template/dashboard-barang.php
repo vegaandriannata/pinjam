@@ -14,7 +14,7 @@ if (isset($_GET['hapus'])) {
 }
 
 // Fetch data from the database
-$query = "SELECT id_brg, nama_brg, merek, kode_brg, tgl_pembelian, harga, qr, gambar, serial_key FROM barang";
+$query = "SELECT id_brg, nama_brg, merek, kode_brg, tgl_pembelian, harga, qr,qr_link, gambar, serial_key FROM barang";
 
 $result = mysqli_query($koneksi, $query);
 
@@ -34,7 +34,7 @@ if (!$result) {
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
       <!-- Meta -->
-	  
+	  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 	  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -427,6 +427,7 @@ function toggleFilterForm() {
 																<th>Tanggal Pembelian</th>
 																<th>Harga</th>
 																<th>Kode QR</th>
+																<th>QR Link</th>
 																<th>Gambar</th>
 																<th>Serial Key</th>
 																<th>Action</th>
@@ -439,6 +440,10 @@ function toggleFilterForm() {
 															$no = 1;
 
 															while ($row = mysqli_fetch_assoc($result)) {
+																$urlview = $row['qr_link'];
+																$qrlink = 'https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=' . $urlview . '&choe=UTF-8';
+																
+																
 																echo "<tr>";
 																echo "<td>" . $no . "</td>";
 																echo "<td>" . $row['nama_brg'] . "</td>";
@@ -451,6 +456,7 @@ function toggleFilterForm() {
 																 $formattedHarga = "Rp " . number_format($row['harga'], 0, ',', '.');
 																echo "<td>" . $formattedHarga . "</td>";
 																echo "<td id='qrcode-" . $row['id_brg'] . "'></td>";
+																echo "<td><img src='" . $qrlink . "' alt='QR Code'></td>";
 																echo "<td><img src='" . $row['gambar'] . "' alt='Product Image' style='max-width: 100px; max-height: 100px;'></td>";
 																echo "<td>" . $row['serial_key'] . "</td>";
 																	echo "<td>
@@ -481,6 +487,7 @@ function toggleFilterForm() {
 																<th>Tanggal Pembelian</th>
 																<th>Harga</th>
 																<th>Kode QR</th>
+																<th>QR Link</th>
 																<th>Gambar</th>
 																<th>Serial Key</th>
                                                             </tr>
@@ -490,45 +497,7 @@ function toggleFilterForm() {
                                             </div>
                                         </div>
                                         <!-- Add Contact Start Model -->
-                                        <div class="md-modal md-effect-13 addcontact" id="modal-13">
-										<div class="md-content">
-											<h3 class="f-26">Form Peminjaman Barang</h3>
-											<form action="proses_input.php" method="post">
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon1"><i class="icofont icofont-user"></i></span>
-													<input type="text" class="form-control" placeholder="Nama Peminjam" id="nama_peminjam" name="nama_peminjam" required>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-user"></i></span>
-													<input type="text" class="form-control" placeholder="Barang" id="barang" name="barang" required>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon3"><i class="icofont icofont-user"></i></span>
-													<input type="number" class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" required>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon4"><i class="icofont icofont-user"></i></span>
-													<input type="date" class="form-control" placeholder="Tanggal Pinjam" id="tanggal_pinjam" name="tanggal_pinjam" required>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon5"><i class="icofont icofont-user"></i></span>
-													<input type="date" class="form-control" placeholder="Estimasi Peminjaman" id="estimasi_peminjaman" name="estimasi_peminjaman" required>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon6"><i class="icofont icofont-user"></i></span>
-													<textarea class="form-control" placeholder="Keterangan" id="keterangan" name="keterangan"></textarea>
-												</div>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon7"><i class="icofont icofont-user"></i></span>
-													<textarea class="form-control" placeholder="Kondisi Awal" id="kondisi_awal" name="kondisi_awal"></textarea>
-												</div>
-												<div class="text-center">
-													<button type="submit" class="btn btn-primary waves-effect m-r-20 f-w-600 d-inline-block">Save</button>
-													<button type="button" class="btn btn-primary waves-effect m-r-20 f-w-600 md-close d-inline-block">Close</button>
-												</div>
-											</form>
-										</div>
-									</div>
+                                       
 
                                         <div class="md-overlay"></div>
                                         <!-- Add Contact Ends Model-->
@@ -541,15 +510,13 @@ function toggleFilterForm() {
                         </div>
                         <!-- Warning Section Starts -->
 
-                        <div id="styleSelector">
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- Required Jquery -->
 <script type="text/javascript" src="../bower_components/jquery/js/jquery.min.js"></script>

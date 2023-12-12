@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $targetFile = $targetDir . pathinfo($targetFile, PATHINFO_FILENAME) . "_" . $i . "." . $imageFileType;
             $i++;
         }
-
         // Check file size
         if ($_FILES["gambar"]["size"] > 500000) {
             echo "Sorry, your file is too large.";
@@ -80,3 +79,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+
+
